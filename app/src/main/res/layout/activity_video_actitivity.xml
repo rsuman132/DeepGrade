@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".VideoActitivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/video_toolbar"
+        android:background="#F0F0F0"
+        app:logo="@drawable/ic_baseline_menu_24"
+        app:titleMarginStart="30dp"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/AppTheme">
+
+        <EditText
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/video_edittext"
+            android:hint="Search Videos"
+            android:layout_centerInParent="true"
+            android:textColorHint="#666666"
+            android:background="@drawable/edittextframe"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_notification"
+            android:layout_gravity="end"
+            android:layout_marginEnd="25dp"/>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/video_toolbar"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/recyclerView_Video">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+</RelativeLayout>

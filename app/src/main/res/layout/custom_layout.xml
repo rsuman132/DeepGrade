@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/main_Relative"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="10dp">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardElevation="20dp"
+        app:contentPadding="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/myImg"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:scaleType="centerInside"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/video"
+                android:padding="15dp"/>
+            <TextView
+                android:id="@+id/myText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="centerInside"
+                android:layout_gravity="center_horizontal"
+                android:text="Video"
+                android:textSize="16dp"
+                android:textColor="#000000"
+                android:paddingBottom="20dp"/>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>

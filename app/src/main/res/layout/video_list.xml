@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+        
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/thumbnail"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:src="@drawable/bg"
+                android:scaleType="fitXY"
+                android:layout_gravity="center"/>
+
+            <TextView
+                android:id="@+id/videotitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Chapter 1 - A Visitor From Distant Land"
+                android:textSize="18dp"
+                android:textColor="#707070"
+                android:layout_marginTop="10dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="My House. After their family, the next closest thing to them is their home"
+                android:textColor="#707070"
+                android:textSize="16dp"
+                android:layout_marginTop="10dp"/>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

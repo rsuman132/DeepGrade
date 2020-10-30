@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -30,7 +31,8 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements Adaptor.RecyclerViewClickListner {
 
-    //private static final int PERMISSION_CODE = 100;
+    public static final int CAMERA_PERM_CODE = 101;
+    public static final int CAMERA_REQUEST_CODE = 102;
     private Toolbar toolbar;
     private RecyclerView recyclerView;
     List<Integer> images;
@@ -41,7 +43,6 @@ public class MainActivity extends AppCompatActivity implements Adaptor.RecyclerV
     private File storage;
     private String[] storagePaths;
 
-    Uri image_uri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,27 +103,20 @@ public class MainActivity extends AppCompatActivity implements Adaptor.RecyclerV
     }
 
     private void cameraAction() {
-        if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(MainActivity.this, new String[]{
-                    Manifest.permission.CAMERA
-            }, 100);
+        if(ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this,new String[] {Manifest.permission.CAMERA}, CAMERA_PERM_CODE);
+        }else {
+            dispatchTakePictureIntent();
         }
-        insidecamera();
-    }
-
-    private void insidecamera() {
-        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        startActivityForResult(cameraIntent, 100);
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == 100) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                insidecamera();
-            } else {
-                Toast.makeText(this, "camera permission denied", Toast.LENGTH_LONG).show();
+        if(requestCode == CAMERA_PERM_CODE){
+            if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                dispatchTakePictureIntent();
+            }else {
+                Toast.makeText(this, "Camera Permission is Required to Use camera.", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -130,14 +124,19 @@ public class MainActivity extends AppCompatActivity implements Adaptor.RecyclerV
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 100) {
-            Bitmap captureImage = (Bitmap) data.getExtras().get("data");
-
-            Intent i = new Intent(this, CameraImage.class);
-            i.putExtra("images", captureImage);
-            startActivity(i);
-
+        if (requestCode == CAMERA_REQUEST_CODE) {
+            if (resultCode == Activity.RESULT_OK) {
+                Bitmap captureImage = (Bitmap) data.getExtras().get("data");
+                Intent i = new Intent(this, CameraImage.class);
+                i.putExtra("images", captureImage);
+                startActivity(i);
+            }
         }
+    }
+
+    private void dispatchTakePictureIntent() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(takePictureIntent, CAMERA_REQUEST_CODE);
     }
 
 
